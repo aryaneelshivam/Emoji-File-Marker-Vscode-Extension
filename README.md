@@ -55,7 +55,7 @@ Mark and tag your files with emojis in the VS Code file explorer! 🎨
 
 ### Manual Installation
 
-1. Download the `.vsix` file from the [releases page](https://github.com/your-username/emoji-file-markers/releases)
+1. Download the `.vsix` file from the [releases page](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/releases)
 2. Open VS Code
 3. Press `Cmd+Shift+P` (macOS) or `Ctrl+Shift+P` (Windows/Linux)
 4. Type **"Extensions: Install from VSIX..."**
@@ -354,7 +354,7 @@ If you use version control, you may be able to recover from a previous commit.
 **A**: Yes! The extension works in remote development scenarios. Markers are stored in the remote workspace.
 
 ### Q: Is this extension open source?
-**A**: Yes! Check out the [GitHub repository](https://github.com/your-username/emoji-file-markers) to contribute or report issues.
+**A**: Yes! Check out the [GitHub repository](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension) to contribute or report issues.
 
 ---
 
@@ -409,8 +409,8 @@ We welcome contributions! 🎉
 
 Found a bug or have a feature request?
 
-1. Check [existing issues](https://github.com/your-username/emoji-file-markers/issues)
-2. If no match, [open a new issue](https://github.com/your-username/emoji-file-markers/issues/new)
+1. Check [existing issues](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/issues)
+2. If no match, [open a new issue](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/issues/new)
 3. Provide:
    - VS Code version
    - Extension version
@@ -421,7 +421,7 @@ Found a bug or have a feature request?
 
 Have an idea? We'd love to hear it!
 
-1. [Open an issue](https://github.com/your-username/emoji-file-markers/issues/new)
+1. [Open an issue](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/issues/new)
 2. Tag it with `enhancement`
 3. Describe the feature and use case
 
@@ -441,9 +441,9 @@ Have an idea? We'd love to hear it!
 Need help? Here's how to get support:
 
 - 📖 **Documentation**: You're reading it! Check the sections above
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/your-username/emoji-file-markers/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/your-username/emoji-file-markers/discussions)
-- ⭐ **Feedback**: Leave a review on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=your-publisher-name.emoji-file-markers)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/discussions)
+- ⭐ **Feedback**: Leave a review on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
 
 ---
 
@@ -451,7 +451,7 @@ Need help? Here's how to get support:
 
 This extension is licensed under the [MIT License](LICENSE).
 
-Copyright (c) 2025 [Your Name]
+Copyright (c) 2025 Aryaneel Shivam
 
 ---
 
@@ -467,7 +467,7 @@ Copyright (c) 2025 [Your Name]
 
 **Enjoy organizing your files with emojis!** 🎉
 
-If you find this extension useful, please ⭐ **star** the [GitHub repository](https://github.com/your-username/emoji-file-markers) and leave a ⭐ **review** on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=your-publisher-name.emoji-file-markers)!
+If you find this extension useful, please ⭐ **star** the [GitHub repository](https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension) and leave a ⭐ **review** on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)!
 
 Made with 💜 by developers, for developers
 

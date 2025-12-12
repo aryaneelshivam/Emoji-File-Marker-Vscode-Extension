@@ -3,7 +3,11 @@
   "displayName": "Emoji File Markers",
   "description": "Mark and tag files with emojis in the VS Code file explorer",
   "version": "0.1.0",
-  "publisher": "your-publisher-name",
+  "publisher": "AryaneelShivam",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension.git"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -61,5 +65,8 @@
     "@types/node": "^18.x",
     "@types/vscode": "^1.75.0",
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^3.7.1"
   }
 }
