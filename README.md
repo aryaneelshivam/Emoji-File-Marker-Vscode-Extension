@@ -1,10 +1,18 @@
-# Emoji File Markers
+<div align="center">
+  <img src="emojilogo.png" width="128" alt="Emoji File Markers Logo" />
+  <h1>Emoji File Markers</h1>
+  <p>
+    <b>Mark and tag your files with emojis in the VS Code file explorer! 🎨</b>
+  </p>
 
-Mark and tag your files with emojis in the VS Code file explorer! 🎨
+  [![Version](https://img.shields.io/badge/version-0.1.2-blue.svg)](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
+  [![VS Code](https://img.shields.io/badge/VS%20Code-1.75.0+-brightgreen.svg)](https://code.visualstudio.com/)
+  [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 
-![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)
-![VS Code](https://img.shields.io/badge/VS%20Code-1.75.0+-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-orange.svg)
+  <br/>
+  <img src="demo_screenshot.png" alt="Emoji File Markers Demo" width="600" />
+  <br/>
+</div>
 
 ## 📋 Table of Contents
 

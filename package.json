@@ -2,7 +2,7 @@
   "name": "emoji-file-markers",
   "displayName": "Emoji File Markers",
   "description": "Mark and tag files with emojis in the VS Code file explorer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "icon": "emojilogo.png",
   "publisher": "AryaneelShivam",
   "repository": {
