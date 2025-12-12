@@ -9,6 +9,11 @@
     "type": "git",
     "url": "https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension.git"
   },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension/issues"
+  },
+  "homepage": "https://github.com/aryaneelshivam/Emoji-File-Marker-Vscode-Extension#readme",
   "engines": {
     "vscode": "^1.75.0"
   },
