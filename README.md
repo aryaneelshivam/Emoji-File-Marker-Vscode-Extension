@@ -2,7 +2,7 @@
 
 Mark and tag your files with emojis in the VS Code file explorer! 🎨
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.75.0+-brightgreen.svg)
 ![License](https://img.shields.io/badge/license-MIT-orange.svg)
 
