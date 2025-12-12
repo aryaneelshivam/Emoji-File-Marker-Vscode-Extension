@@ -1,0 +1,65 @@
+{
+  "name": "emoji-file-markers",
+  "displayName": "Emoji File Markers",
+  "description": "Mark and tag files with emojis in the VS Code file explorer",
+  "version": "0.1.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "emoji",
+    "file",
+    "markers",
+    "tags",
+    "organization"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "emojiFileMarkers.addEmoji",
+        "title": "Add Emoji Marker"
+      },
+      {
+        "command": "emojiFileMarkers.removeEmoji",
+        "title": "Remove Emoji Marker"
+      },
+      {
+        "command": "emojiFileMarkers.clearAll",
+        "title": "Clear All Emoji Markers"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "emojiFileMarkers.addEmoji",
+          "when": "!explorerResourceIsFolder",
+          "group": "2_workspace@1"
+        },
+        {
+          "command": "emojiFileMarkers.removeEmoji",
+          "when": "!explorerResourceIsFolder",
+          "group": "2_workspace@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^5.0.0"
+  }
+}
