@@ -58,6 +58,20 @@
           "when": "resourceScheme == file",
           "group": "2_workspace@2"
         }
+      ],
+      "commandPalette": [
+        {
+          "command": "emojiFileMarkers.addEmoji",
+          "when": "resourceScheme == file"
+        },
+        {
+          "command": "emojiFileMarkers.removeEmoji",
+          "when": "resourceScheme == file"
+        },
+        {
+          "command": "emojiFileMarkers.clearAll",
+          "when": "workspaceFolderCount != 0"
+        }
       ]
     },
     "configuration": {

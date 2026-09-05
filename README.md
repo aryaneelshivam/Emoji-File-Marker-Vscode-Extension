@@ -356,6 +356,10 @@ Currently, this extension does not define default keyboard shortcuts to avoid co
 4. Press your desired key combination
 5. Press **Enter** to save
 
+> **📌 Note**: If you bind your own shortcut, consider giving it the same `when` clause the
+> Command Palette uses — `resourceScheme == file` — so the key stays free for other uses
+> when no file or folder is in context.
+
 **Suggested Shortcuts:**
 
 | Command | Suggested Shortcut | Description |
@@ -372,11 +376,16 @@ All commands are accessible via:
 - **Command Palette** (`Cmd+Shift+P` or `Ctrl+Shift+P`)
 - **Context Menu** (right-click on files or folders; multi-selection supported)
 
-| Command ID | Display Name | Description | Where Available |
-|------------|--------------|-------------|-----------------|
-| `emojiFileMarkers.addEmoji` | Add Emoji Marker | Add an emoji marker to the selected files and/or folders | Context Menu, Command Palette |
-| `emojiFileMarkers.removeEmoji` | Remove Emoji Marker | Remove emoji markers from the selected files and/or folders | Context Menu, Command Palette |
-| `emojiFileMarkers.clearAll` | Clear All Emoji Markers | Remove all emoji markers from the workspace | Command Palette |
+| Command ID | Display Name | Description | Where Available | Shown when |
+|------------|--------------|-------------|-----------------|------------|
+| `emojiFileMarkers.addEmoji` | Add Emoji Marker | Add an emoji marker to the selected files and/or folders | Context Menu, Command Palette | A file or folder is selected or open |
+| `emojiFileMarkers.removeEmoji` | Remove Emoji Marker | Remove emoji markers from the selected files and/or folders | Context Menu, Command Palette | A file or folder is selected or open |
+| `emojiFileMarkers.clearAll` | Clear All Emoji Markers | Remove all emoji markers from the workspace | Command Palette | A workspace is open |
+
+The two marker commands act on whatever resource is in context — the Explorer selection if
+there is one, otherwise the active editor's file. They are hidden from the Command Palette
+when there is no such resource (`resourceScheme == file`), rather than appearing and then
+reporting that nothing is selected.
 
 ---
 
