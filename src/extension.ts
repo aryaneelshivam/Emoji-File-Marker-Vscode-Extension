@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { StorageManager } from './storageManager';
 import { EmojiDecorationProvider } from './decorationProvider';
 import { addEmojiCommand, removeEmojiCommand, clearAllCommand } from './commands';
+import { RecentEmojiStore } from './recentEmojis';
 
 /**
  * Extension activation function
@@ -11,23 +12,28 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Initialize storage manager
     const storageManager = new StorageManager(context);
+    context.subscriptions.push(storageManager);
+
+    // Remembers which emojis get picked, so the picker can lead with them
+    const recentEmojiStore = new RecentEmojiStore(context);
 
     // Initialize and register decoration provider
     const decorationProvider = new EmojiDecorationProvider(storageManager);
     context.subscriptions.push(
+        decorationProvider,
         vscode.window.registerFileDecorationProvider(decorationProvider)
     );
 
     // Register commands
     context.subscriptions.push(
-        vscode.commands.registerCommand('emojiFileMarkers.addEmoji', (uri?: vscode.Uri) => {
-            return addEmojiCommand(storageManager, uri);
+        vscode.commands.registerCommand('emojiFileMarkers.addEmoji', (uri?: vscode.Uri, selectedUris?: vscode.Uri[]) => {
+            return addEmojiCommand(storageManager, recentEmojiStore, uri, selectedUris);
         })
     );
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('emojiFileMarkers.removeEmoji', (uri?: vscode.Uri) => {
-            return removeEmojiCommand(storageManager, uri);
+        vscode.commands.registerCommand('emojiFileMarkers.removeEmoji', (uri?: vscode.Uri, selectedUris?: vscode.Uri[]) => {
+            return removeEmojiCommand(storageManager, uri, selectedUris);
         })
     );
 

@@ -2,7 +2,7 @@
   "name": "emoji-file-markers",
   "displayName": "Emoji File Markers",
   "description": "Mark and tag files with emojis in the VS Code file explorer",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "icon": "emojilogo.png",
   "publisher": "AryaneelShivam",
   "repository": {
@@ -50,29 +50,57 @@
       "explorer/context": [
         {
           "command": "emojiFileMarkers.addEmoji",
-          "when": "!explorerResourceIsFolder",
+          "when": "resourceScheme == file",
           "group": "2_workspace@1"
         },
         {
           "command": "emojiFileMarkers.removeEmoji",
-          "when": "!explorerResourceIsFolder",
+          "when": "resourceScheme == file",
           "group": "2_workspace@2"
         }
+      ],
+      "commandPalette": [
+        {
+          "command": "emojiFileMarkers.addEmoji",
+          "when": "resourceScheme == file"
+        },
+        {
+          "command": "emojiFileMarkers.removeEmoji",
+          "when": "resourceScheme == file"
+        },
+        {
+          "command": "emojiFileMarkers.clearAll",
+          "when": "workspaceFolderCount != 0"
+        }
       ]
+    },
+    "configuration": {
+      "title": "Emoji File Markers",
+      "properties": {
+        "emojiFileMarkers.showInheritedMarkers": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show an emoji badge on files and folders inside a marked folder. When off, only the folder you marked gets a badge."
+        },
+        "emojiFileMarkers.inheritedMarkerPrefix": {
+          "type": "string",
+          "default": "·",
+          "markdownDescription": "Character placed before an inherited emoji to tell it apart from one set directly on the item, for example `·🔥` vs `🔥`. Set to an empty string to show the bare emoji. Only the first character is used — VS Code badges hold at most two."
+        }
+      }
     }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "test": "node --test \"out/test/**/*.test.js\""
   },
   "devDependencies": {
     "@types/node": "^18.x",
     "@types/vscode": "^1.75.0",
+    "@vscode/vsce": "^3.7.1",
     "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@vscode/vsce": "^3.7.1"
   }
 }

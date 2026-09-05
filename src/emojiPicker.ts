@@ -1,110 +1,95 @@
 import * as vscode from 'vscode';
+import {
+    EMOJI_CATALOG,
+    EMOJI_SECTIONS,
+    EmojiDefinition,
+    RECENT_SECTION_TITLE,
+    describeEmoji,
+    getRecentEmojis
+} from './emojiCatalog';
+import { searchEmojis } from './emojiSearch';
+import { RecentEmojiStore } from './recentEmojis';
 
 interface EmojiItem extends vscode.QuickPickItem {
-    emoji: string;
+    /** Absent on separator rows. */
+    emoji?: string;
+}
+
+function toItem(definition: EmojiDefinition): EmojiItem {
+    return {
+        emoji: definition.emoji,
+        label: definition.emoji,
+        description: describeEmoji(definition),
+        // Results are ranked here, so they must survive the built-in filter untouched.
+        alwaysShow: true
+    };
+}
+
+function separator(label: string): EmojiItem {
+    return { label, kind: vscode.QuickPickItemKind.Separator };
+}
+
+/** The unfiltered list: recently used first, then every category under its own heading. */
+function buildBrowseItems(recent: EmojiDefinition[]): EmojiItem[] {
+    const items: EmojiItem[] = [];
+
+    if (recent.length > 0) {
+        items.push(separator(RECENT_SECTION_TITLE));
+        items.push(...recent.map(toItem));
+    }
+
+    for (const section of EMOJI_SECTIONS) {
+        items.push(separator(section.title));
+        items.push(...section.emojis.map(toItem));
+    }
+
+    return items;
 }
 
 /**
- * Shows an emoji picker and returns the selected emoji
+ * Shows an emoji picker and returns the selected emoji.
+ *
+ * With an empty search box the picker browses by section, led by the last 12 emojis
+ * picked. Typing switches to a ranked flat list from {@link searchEmojis} — the built-in
+ * matcher is turned off so it cannot reorder those results.
  */
-export async function showEmojiPicker(): Promise<string | undefined> {
-    const emojis: EmojiItem[] = [
-        // Smileys & People
-        { emoji: '😀', label: '😀', description: 'Grinning Face' },
-        { emoji: '😃', label: '😃', description: 'Grinning Face with Big Eyes' },
-        { emoji: '😄', label: '😄', description: 'Grinning Face with Smiling Eyes' },
-        { emoji: '😊', label: '😊', description: 'Smiling Face with Smiling Eyes' },
-        { emoji: '🙂', label: '🙂', description: 'Slightly Smiling Face' },
-        { emoji: '🤔', label: '🤔', description: 'Thinking Face' },
-        { emoji: '😎', label: '😎', description: 'Smiling Face with Sunglasses' },
-        { emoji: '🤓', label: '🤓', description: 'Nerd Face' },
-        { emoji: '🥳', label: '🥳', description: 'Partying Face' },
-        { emoji: '😴', label: '😴', description: 'Sleeping Face' },
-        { emoji: '🤯', label: '🤯', description: 'Exploding Head' },
+export async function showEmojiPicker(recentStore?: RecentEmojiStore): Promise<string | undefined> {
+    const recent = getRecentEmojis(EMOJI_CATALOG, recentStore?.getRecent() ?? []);
+    const browseItems = buildBrowseItems(recent);
 
-        // Symbols & Status
-        { emoji: '✅', label: '✅', description: 'Check Mark' },
-        { emoji: '❌', label: '❌', description: 'Cross Mark' },
-        { emoji: '⚠️', label: '⚠️', description: 'Warning' },
-        { emoji: '🚨', label: '🚨', description: 'Police Car Light' },
-        { emoji: '🔥', label: '🔥', description: 'Fire' },
-        { emoji: '⭐', label: '⭐', description: 'Star' },
-        { emoji: '💡', label: '💡', description: 'Light Bulb' },
-        { emoji: '💯', label: '💯', description: 'Hundred Points' },
-        { emoji: '🎯', label: '🎯', description: 'Direct Hit' },
-        { emoji: '🏆', label: '🏆', description: 'Trophy' },
-        { emoji: '🔑', label: '🔑', description: 'Key' },
-        { emoji: '🔒', label: '🔒', description: 'Locked' },
-        { emoji: '🔓', label: '🔓', description: 'Unlocked' },
+    const picker = vscode.window.createQuickPick<EmojiItem>();
+    picker.title = 'Emoji File Marker';
+    picker.placeholder = 'Select an emoji — search by name or by convention (urgent, blocked, in progress…)';
+    // Ranking is ours; leaving these on would let the fuzzy scorer re-sort the results.
+    picker.matchOnDescription = false;
+    picker.matchOnDetail = false;
+    picker.items = browseItems;
 
-        // Objects & Tools
-        { emoji: '📝', label: '📝', description: 'Memo' },
-        { emoji: '📄', label: '📄', description: 'Page Facing Up' },
-        { emoji: '📋', label: '📋', description: 'Clipboard' },
-        { emoji: '📁', label: '📁', description: 'File Folder' },
-        { emoji: '📂', label: '📂', description: 'Open File Folder' },
-        { emoji: '🗂️', label: '🗂️', description: 'Card Index Dividers' },
-        { emoji: '📊', label: '📊', description: 'Bar Chart' },
-        { emoji: '📈', label: '📈', description: 'Chart Increasing' },
-        { emoji: '📉', label: '📉', description: 'Chart Decreasing' },
-        { emoji: '🔧', label: '🔧', description: 'Wrench' },
-        { emoji: '🔨', label: '🔨', description: 'Hammer' },
-        { emoji: '⚙️', label: '⚙️', description: 'Gear' },
-        { emoji: '🛠️', label: '🛠️', description: 'Hammer and Wrench' },
+    const selected = await new Promise<EmojiItem | undefined>((resolve) => {
+        picker.onDidChangeValue((value) => {
+            const query = value.trim();
+            picker.items = query === ''
+                ? browseItems
+                : searchEmojis(EMOJI_CATALOG, query).map(toItem);
+        });
 
-        // Development & Tech
-        { emoji: '💻', label: '💻', description: 'Laptop' },
-        { emoji: '🖥️', label: '🖥️', description: 'Desktop Computer' },
-        { emoji: '⌨️', label: '⌨️', description: 'Keyboard' },
-        { emoji: '🖱️', label: '🖱️', description: 'Computer Mouse' },
-        { emoji: '💾', label: '💾', description: 'Floppy Disk' },
-        { emoji: '💿', label: '💿', description: 'Optical Disk' },
-        { emoji: '🐛', label: '🐛', description: 'Bug' },
-        { emoji: '🚀', label: '🚀', description: 'Rocket' },
-        { emoji: '⚡', label: '⚡', description: 'High Voltage' },
-        { emoji: '🔬', label: '🔬', description: 'Microscope' },
+        picker.onDidAccept(() => {
+            resolve(picker.selectedItems[0]);
+            picker.hide();
+        });
 
-        // Colors & Flags
-        { emoji: '🔴', label: '🔴', description: 'Red Circle' },
-        { emoji: '🟠', label: '🟠', description: 'Orange Circle' },
-        { emoji: '🟡', label: '🟡', description: 'Yellow Circle' },
-        { emoji: '🟢', label: '🟢', description: 'Green Circle' },
-        { emoji: '🔵', label: '🔵', description: 'Blue Circle' },
-        { emoji: '🟣', label: '🟣', description: 'Purple Circle' },
-        { emoji: '⚫', label: '⚫', description: 'Black Circle' },
-        { emoji: '⚪', label: '⚪', description: 'White Circle' },
-        { emoji: '🏁', label: '🏁', description: 'Chequered Flag' },
-        { emoji: '🚩', label: '🚩', description: 'Red Flag' },
-        { emoji: '🏴', label: '🏴', description: 'Black Flag' },
+        picker.onDidHide(() => resolve(undefined));
 
-        // Arrows & Directions
-        { emoji: '➡️', label: '➡️', description: 'Right Arrow' },
-        { emoji: '⬅️', label: '⬅️', description: 'Left Arrow' },
-        { emoji: '⬆️', label: '⬆️', description: 'Up Arrow' },
-        { emoji: '⬇️', label: '⬇️', description: 'Down Arrow' },
-        { emoji: '↗️', label: '↗️', description: 'Up-Right Arrow' },
-        { emoji: '↘️', label: '↘️', description: 'Down-Right Arrow' },
-        { emoji: '🔄', label: '🔄', description: 'Anticlockwise Arrows' },
-        { emoji: '🔃', label: '🔃', description: 'Clockwise Vertical Arrows' },
-
-        // Nature & Animals
-        { emoji: '🌟', label: '🌟', description: 'Glowing Star' },
-        { emoji: '🌈', label: '🌈', description: 'Rainbow' },
-        { emoji: '🌙', label: '🌙', description: 'Crescent Moon' },
-        { emoji: '☀️', label: '☀️', description: 'Sun' },
-        { emoji: '⚡', label: '⚡', description: 'Lightning' },
-        { emoji: '🐝', label: '🐝', description: 'Honeybee' },
-        { emoji: '🦋', label: '🦋', description: 'Butterfly' },
-        { emoji: '🌺', label: '🌺', description: 'Hibiscus' },
-        { emoji: '🌸', label: '🌸', description: 'Cherry Blossom' },
-        { emoji: '🌻', label: '🌻', description: 'Sunflower' },
-    ];
-
-    const selected = await vscode.window.showQuickPick(emojis, {
-        placeHolder: 'Select an emoji to mark this file',
-        matchOnDescription: true,
-        title: 'Emoji File Marker'
+        picker.show();
     });
 
-    return selected?.emoji;
+    picker.dispose();
+
+    if (!selected?.emoji) {
+        return undefined;
+    }
+
+    await recentStore?.record(selected.emoji);
+
+    return selected.emoji;
 }
