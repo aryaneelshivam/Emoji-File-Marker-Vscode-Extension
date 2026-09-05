@@ -80,6 +80,10 @@ export class StorageManager {
         this.changeEmitter.fire(changedUris);
     }
 
+    dispose(): void {
+        this.changeEmitter.dispose();
+    }
+
     /**
      * Get all URIs that have emoji markers
      */

@@ -11,6 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Initialize storage manager
     const storageManager = new StorageManager(context);
+    context.subscriptions.push(storageManager);
 
     // Initialize and register decoration provider
     const decorationProvider = new EmojiDecorationProvider(storageManager);
