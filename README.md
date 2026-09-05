@@ -5,7 +5,7 @@
     <b>Mark and tag your files with emojis in the VS Code file explorer! 🎨</b>
   </p>
 
-  [![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
+  [![Version](https://img.shields.io/badge/version-0.2.1-blue.svg)](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
   [![VS Code](https://img.shields.io/badge/VS%20Code-1.75.0+-brightgreen.svg)](https://code.visualstudio.com/)
   [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 
@@ -182,6 +182,11 @@ Every convention in [Use Cases & Best Practices](#use-cases--best-practices) wor
 way — those five are just a taste.
 
 > **💡 Tip**: Plain emoji names still work too — `fire`, `bug`, `star` and so on.
+
+Results are ranked so that an exact hit always leads: a keyword or name equal to what you
+typed comes first, then prefixes, then whole-word matches, then anything merely containing
+the letters. Typing `yes` puts 👍 at the top rather than the emoji whose name happens to
+contain "Eyes".
 
 ### Removing Emoji Markers
 
@@ -550,6 +555,11 @@ try to fake them:
 ---
 
 ## Release Notes
+
+### 0.2.1
+
+- 🔍 The picker now ranks its own search results instead of relying on the Quick Pick's fuzzy matcher, which scored an accidental substring anywhere in the text. `yes` led with "Grinning Face with Big Eyes" and "Yellow Square" ahead of 👍; an exact keyword or name now always wins
+- 👍 👎 also answer to `good` / `yes` and `bad` / `no`
 
 ### 0.2.0
 
