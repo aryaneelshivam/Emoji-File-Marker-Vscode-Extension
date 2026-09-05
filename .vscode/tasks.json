@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // Default build task, so launch.json's "${defaultBuildTask}" resolves.
+            // $tsc-watch is a background matcher: F5 waits for the first compile to
+            // report "Found 0 errors" before starting the Extension Development Host.
+            "type": "npm",
+            "script": "watch",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": true,
+            "problemMatcher": "$tsc-watch",
+            "presentation": {
+                "reveal": "never",
+                "group": "watchers"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "compile",
+            "group": "build",
+            "problemMatcher": "$tsc",
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": "$tsc"
+        }
+    ]
+}
