@@ -21,14 +21,14 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Register commands
     context.subscriptions.push(
-        vscode.commands.registerCommand('emojiFileMarkers.addEmoji', (uri?: vscode.Uri) => {
-            return addEmojiCommand(storageManager, uri);
+        vscode.commands.registerCommand('emojiFileMarkers.addEmoji', (uri?: vscode.Uri, selectedUris?: vscode.Uri[]) => {
+            return addEmojiCommand(storageManager, uri, selectedUris);
         })
     );
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('emojiFileMarkers.removeEmoji', (uri?: vscode.Uri) => {
-            return removeEmojiCommand(storageManager, uri);
+        vscode.commands.registerCommand('emojiFileMarkers.removeEmoji', (uri?: vscode.Uri, selectedUris?: vscode.Uri[]) => {
+            return removeEmojiCommand(storageManager, uri, selectedUris);
         })
     );
 

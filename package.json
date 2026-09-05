@@ -50,12 +50,12 @@
       "explorer/context": [
         {
           "command": "emojiFileMarkers.addEmoji",
-          "when": "!explorerResourceIsFolder",
+          "when": "resourceScheme == file",
           "group": "2_workspace@1"
         },
         {
           "command": "emojiFileMarkers.removeEmoji",
-          "when": "!explorerResourceIsFolder",
+          "when": "resourceScheme == file",
           "group": "2_workspace@2"
         }
       ]

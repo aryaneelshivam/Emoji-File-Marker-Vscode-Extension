@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 import { StorageManager } from './storageManager';
 
+/** Marks a badge as inherited from a parent folder rather than set on the item itself. */
+const INHERITED_PREFIX = '\u00B7';
+
 /**
  * Provides file decorations (emoji badges) for marked files
  */
@@ -23,22 +26,24 @@ export class EmojiDecorationProvider implements vscode.FileDecorationProvider {
      * Provide file decoration for a given URI
      */
     provideFileDecoration(uri: vscode.Uri): vscode.FileDecoration | undefined {
-        const emoji = this.storageManager.getEmoji(uri);
+        const marker = this.storageManager.resolveEmoji(uri);
 
-        if (emoji) {
+        if (!marker) {
+            return undefined;
+        }
+
+        if (marker.source === 'self') {
             return {
-                badge: emoji,
-                tooltip: `Marked with ${emoji}`
+                badge: marker.emoji,
+                tooltip: `Marked with ${marker.emoji}`,
+                propagate: false
             };
         }
 
-        return undefined;
-    }
-
-    /**
-     * Manually trigger decoration refresh for specific URIs
-     */
-    refresh(uris: vscode.Uri[]): void {
-        this.changeEmitter.fire(uris);
+        return {
+            badge: INHERITED_PREFIX + marker.emoji,
+            tooltip: `Inherited ${marker.emoji} from parent folder`,
+            propagate: false
+        };
     }
 }
