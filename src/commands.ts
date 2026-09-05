@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { StorageManager } from './storageManager';
 import { showEmojiPicker } from './emojiPicker';
+import { RecentEmojiStore } from './recentEmojis';
 
 /**
  * Resolve the items a command should act on: an explorer multi-selection if there is one,
@@ -24,6 +25,7 @@ function resolveTargetUris(uri?: vscode.Uri, selectedUris?: vscode.Uri[]): vscod
  */
 export async function addEmojiCommand(
     storageManager: StorageManager,
+    recentStore: RecentEmojiStore,
     uri?: vscode.Uri,
     selectedUris?: vscode.Uri[]
 ): Promise<void> {
@@ -54,7 +56,7 @@ export async function addEmojiCommand(
         return;
     }
 
-    const emoji = await showEmojiPicker();
+    const emoji = await showEmojiPicker(recentStore);
 
     if (!emoji) {
         return;

@@ -22,6 +22,7 @@
 - [User Manual](#user-manual)
   - [Getting Started](#getting-started)
   - [Adding Emoji Markers](#adding-emoji-markers)
+  - [Finding the Right Emoji](#finding-the-right-emoji)
   - [Removing Emoji Markers](#removing-emoji-markers)
   - [Managing Markers](#managing-markers)
 - [Available Emojis](#available-emojis)
@@ -38,7 +39,7 @@
 
 ## Overview
 
-**Emoji File Markers** is a VS Code extension that allows you to visually organize your workspace by adding emoji markers to files and folders in the File Explorer. With 90+ carefully curated emojis, you can quickly identify file purposes, track status, mark priorities, and create a personalized file organization system.
+**Emoji File Markers** is a VS Code extension that allows you to visually organize your workspace by adding emoji markers to files and folders in the File Explorer. With 120 carefully curated emojis, you can quickly identify file purposes, track status, mark priorities, and create a personalized file organization system.
 
 Mark a folder and everything inside it inherits the badge, so a single marker can label a whole area of the codebase.
 
@@ -48,8 +49,10 @@ Mark a folder and everything inside it inherits the badge, so a single marker ca
 🖱️ **Easy to Use**: Right-click any file or folder in the explorer to add or remove emoji markers  
 📁 **Folder Markers & Inheritance**: Mark a folder and its contents show the badge too, prefixed with `·`  
 🗂️ **Multi-Select**: Select several items in the explorer and mark them all in one go  
+🕒 **Recently Used First**: The picker leads with the emojis you actually reach for  
+🔍 **Search by Convention**: Type `urgent`, `blocked` or `in progress` — not just emoji names  
 💾 **Persistent**: Emoji markers are saved at the workspace level and persist across VS Code sessions  
-🎨 **Rich Emoji Collection**: Choose from 90+ carefully curated emojis across multiple categories  
+🎨 **Rich Emoji Collection**: Choose from 120 carefully curated emojis across multiple categories  
 ⚡ **Quick Access**: Use the Command Palette for quick access to all emoji marker commands  
 🔄 **Workspace-Specific**: Each workspace maintains its own set of emoji markers
 
@@ -101,7 +104,7 @@ There are **two ways** to add an emoji marker, and both work on **files and fold
 
 1. **Right-click** on any file or folder in the File Explorer
 2. Select **"Add Emoji Marker"** from the context menu
-3. A Quick Pick menu will appear with all available emojis organized by category
+3. A Quick Pick menu will appear, led by your recently used emojis
 4. **Click** or **type to search** for the emoji you want
 5. Press **Enter** to apply the emoji
 6. The emoji will immediately appear as a badge next to the name! 🎉
@@ -132,7 +135,52 @@ so you can tell them apart from markers set directly on a file.
 - Inheritance stops at the **workspace root** — markers on folders above your workspace are ignored
 - To clear an inherited badge, remove the marker from the folder that owns it
 
-> **💡 Tip**: The Quick Pick menu is searchable! Just start typing keywords like "fire", "bug", or "star" to quickly find emojis.
+### Finding the Right Emoji
+
+The Quick Pick menu is built to get you to the right emoji in a couple of keystrokes.
+
+#### Section Layout
+
+The picker is grouped into labelled sections:
+
+```
+🕒 Recently Used          ← your last 12 picks, most recent first
+📊 Status & Symbols       ← then every category, in README order
+💻 Development & Tech
+🛠️ Objects & Tools
+👥 People & Collaboration
+⏰ Time & Progress
+🎨 Colors & Flags
+❤️ Hearts
+➡️ Arrows & Directions
+🌿 Nature & Weather
+```
+
+**Recently Used** comes first and holds the last **12** emojis you picked, most recent
+first. It's an *additive* shortcut — a recently used emoji still appears in its own
+category below, so every emoji is always where you expect to find it.
+
+The recency list is stored **globally**, so your habits carry across every workspace you
+open — it is not reset when you switch projects. The section is hidden entirely until you
+have picked your first emoji.
+
+#### Search by Convention, Not Just by Name
+
+Every emoji is searchable by its name *and* by the convention it stands for in the
+[Use Cases](#use-cases--best-practices) section below. So you can type what you mean:
+
+| Type this… | …and find |
+|------------|-----------|
+| `urgent` or `critical` | 🔥 |
+| `in progress` or `wip` | 🚧 |
+| `blocked` | ❌ |
+| `team review` | 👥 |
+| `tech debt` | ♻️ |
+
+Every convention in [Use Cases & Best Practices](#use-cases--best-practices) works this
+way — those five are just a taste.
+
+> **💡 Tip**: Plain emoji names still work too — `fire`, `bug`, `star` and so on.
 
 ### Removing Emoji Markers
 
@@ -185,37 +233,49 @@ Emoji markers are stored in the workspace's `.vscode` folder. To share markers w
 
 ## Available Emojis
 
-The extension provides **90+** carefully curated emojis organized into the following categories:
+The extension provides **120** carefully curated emojis organized into the following categories:
 
-### 📊 Status & Symbols
-✅ ❌ ⚠️ 🚨 🔥 ⭐ 💡 💯 🎯 📌 🏁 🎖️ 🏆 👑 💎
+### 📊 Status & Symbols (20)
+✅ ❌ ⚠️ 🚨 🔥 ⭐ 💎 🚧 ⏳ 🔜 📌 💡 💯 🎯 🏆 🔑 🔒 🔓 ⛔ 🗑️
 
-### 💻 Development & Programming
-💻 🐛 🚀 ⚡ 🔧 🔨 ⚙️ 🛠️ 🖥️ ⌨️ 🖱️ 💾 📱 🌐 🔌
+### 💻 Development & Tech (15)
+💻 🐛 🚀 ⚡ 🧪 🔌 🌐 💾 🖥️ ⌨️ 🖱️ 💿 🔬 📦 📱
 
-### 📄 Files & Documents
-📝 📄 📋 📁 📂 📊 📈 📉 📜 📃 📑 🗂️ 📇 🗃️
+### 🛠️ Objects & Tools (15)
+📝 ⚙️ 🎨 📄 📋 📁 📂 🗂️ 📊 📈 📉 🔧 🔨 🛠️ 🗃️
 
-### 😀 Smileys & Emotions
-😀 😊 🤔 😎 🤓 🥳 😍 🤩 😤 😱 🙌 👍 👎 💪 🤝
+### 👥 People & Collaboration (16)
+👤 👥 💬 😀 😃 😄 😊 🙂 🤔 😎 🤓 🥳 😴 🤯 👍 👎
 
-### 🎨 Colors & Shapes
-🔴 🟠 🟡 🟢 🔵 🟣 ⚫ ⚪ 🟤 🔶 🔷 ⬛ ⬜ 🟥 🟧 🟨 🟩 🟦 🟪
+### ⏰ Time & Progress (4)
+⏰ 📅 ♻️ 🔙
 
-### 🌿 Nature & Weather
-🌟 🌈 ☀️ ⚡ 🌺 🌸 🌻 🌼 🍀 🌿 🌱 🌲 🔆 💧 ❄️
+### 🎨 Colors & Flags (21)
+🏁 🚩 🏴 🔴 🟠 🟡 🟢 🔵 🟣 🟤 ⚫ ⚪ 🟥 🟧 🟨 🟩 🟦 🟪 🟫 ⬛ ⬜
 
-### ⏰ Time & Progress
-⏰ ⏱️ ⏳ ⌛ 🕐 📅 📆 🗓️ 🔜 🔚 🔙 🔄 ♻️
+### ❤️ Hearts (12)
+❤️ 🧡 💛 💚 💙 🩵 💜 🩷 🤎 🩶 🖤 🤍
 
-### 🎯 Miscellaneous
-🎨 🎭 🎪 🎬 🎮 🎲 🎯 🧩 🔮 💬 💭 🗨️ 🔔 🔕 📣
+### ➡️ Arrows & Directions (8)
+➡️ ⬅️ ⬆️ ⬇️ ↗️ ↘️ 🔄 🔃
 
-> **💡 Pro Tip**: The Quick Pick menu displays emojis by category with descriptive labels to help you find the perfect emoji quickly!
+### 🌿 Nature & Weather (9)
+🌟 🌈 🌙 ☀️ 🐝 🦋 🌺 🌸 🌻
+
+These are exactly the sections the emoji picker shows, in this order, each under its own
+separator — preceded by a **🕒 Recently Used** section.
+
+> **💡 Pro Tip**: You don't have to scroll these categories. Your recently used emojis are
+> pinned to the top, and you can search by convention (`urgent`, `blocked`, `team review`)
+> as well as by name — see [Finding the Right Emoji](#finding-the-right-emoji).
 
 ---
 
 ## Use Cases & Best Practices
+
+Every convention below is wired into the picker's search: type the **bold title** (or any
+word in it) and the matching emoji comes up. Marking a *folder* with one of these applies
+it to everything inside, which is the quickest way to label a whole area of the codebase.
 
 ### Priority Marking
 - 🔥 **Urgent/Critical** - Files requiring immediate attention
@@ -229,6 +289,8 @@ The extension provides **90+** carefully curated emojis organized into the follo
 - ⏳ **Pending** - Waiting for something
 - ❌ **Blocked** - Cannot proceed
 - 🔜 **Next Up** - Queued for work
+- 🗑️ **To Delete** - Dead code, slated for removal
+- ⛔ **Do Not Modify** - Generated or vendored, edit the source instead
 
 ### File Categories
 - 📝 **Documentation** - README, guides, notes
@@ -242,6 +304,8 @@ The extension provides **90+** carefully curated emojis organized into the follo
 ### Team Collaboration
 - 👤 **Assigned to Me** - Files you're responsible for
 - 👥 **Team Review** - Needs team input
+- 👍 **Approved** - Signed off, LGTM, Good, Yes
+- 👎 **Changes Requested** - Review came back with comments, Bad, No
 - 💬 **Needs Discussion** - Requires meeting/chat
 - 📌 **Important Reference** - Key documentation
 
@@ -250,7 +314,16 @@ The extension provides **90+** carefully curated emojis organized into the follo
 - 🔌 **API/Integration** - External connections
 - 💾 **Data/Database** - Data-related files
 - 🌐 **Frontend** - UI components
-- ⚙️ **Backend** - Server-side logic
+- ⚙️ **Backend** - Server-side logic (🖥️ also matches `backend`)
+- 📱 **Mobile** - iOS/Android specific code
+- 📦 **Dependency** - Vendored modules, build artifacts
+
+### Time & Lifecycle
+- ⏰ **Deadline** - Time-sensitive work
+- 📅 **Scheduled** - Planned for a known date
+- ♻️ **Tech Debt** - Needs cleanup or rewrite
+- 🔙 **Deprecated** - Kept for compatibility, don't build on it
+- 🗃️ **Archived** - Superseded, retained for reference
 
 ### Best Practices
 
@@ -260,6 +333,8 @@ The extension provides **90+** carefully curated emojis organized into the follo
 4. **Update Regularly**: Remove emojis when tasks are complete or priorities change
 5. **Use Sparingly**: Too many marked files defeats the purpose of quick visual scanning
 6. **Mark Folders, Not Every File**: One marker on a folder labels everything inside it — reach for a per-file marker only when it differs from the folder's
+7. **Let Recency Work For You**: The three or four emojis your convention actually uses will settle at the top of the picker on their own
+8. **Colour-Code a Second Axis**: The circles, squares and hearts come in matching colour sets, so you can run two independent schemes at once — for example squares for owning team and hearts for environment
 
 ---
 
@@ -344,6 +419,12 @@ That's an **inherited** badge — the marker lives on a parent folder, not on th
 tooltip names the folder it came from. Remove the marker from that folder, or set a marker
 directly on the item to override it.
 
+### My recently used emojis aren't at the top
+
+Recency is recorded per emoji the moment you pick one, and is stored globally (not per
+workspace). If the "Recently Used" heading is missing entirely, you haven't picked an
+emoji yet since updating.
+
 ### Emoji Quick Pick menu not showing
 
 **Solutions:**
@@ -374,6 +455,15 @@ If you use version control, you may be able to recover from a previous commit.
 ### Q: How far up does folder inheritance go?
 **A**: Up to the **nearest** marked parent folder, stopping at the workspace root. Markers on folders above your workspace are never inherited.
 
+### Q: How does the picker decide the emoji order?
+**A**: Emojis you've picked before come first, most recently used at the top, under a "Recently Used" heading. Everything else follows in category order. Your last 12 picks are remembered.
+
+### Q: Are recently used emojis per workspace?
+**A**: No — they're stored globally, so your habits follow you into every workspace. The markers themselves stay workspace-specific.
+
+### Q: Can I search the picker by what an emoji *means*?
+**A**: Yes. Every emoji is searchable by the conventions in [Use Cases](#use-cases--best-practices) — type `urgent`, `blocked`, `in progress`, `team review` and so on, as well as plain names like `fire` or `bug`.
+
 ### Q: Where are emoji markers stored?
 **A**: Emoji markers are stored in your workspace's `.vscode/settings.json` file under the workspace state. They are workspace-specific and will persist across VS Code sessions.
 
@@ -381,7 +471,7 @@ If you use version control, you may be able to recover from a previous commit.
 **A**: If you commit your `.vscode` folder to version control, the markers will be available to anyone who clones the repository. Note: Some VS Code settings sync services may also sync these markers.
 
 ### Q: Can I customize the emoji list?
-**A**: Currently, the emoji list is fixed at 90+ emojis. Support for custom emoji lists is being considered for future versions.
+**A**: Currently, the emoji list is fixed at 120 emojis. Support for custom emoji lists is being considered for future versions.
 
 ### Q: Do emoji markers affect performance?
 **A**: No! The extension is lightweight and uses VS Code's native decoration API, so there's minimal performance impact even in large workspaces.
@@ -402,12 +492,12 @@ If you use version control, you may be able to recover from a previous commit.
 
 ## Known Limitations
 
-- ⚠️ **Workspace-specific**: Emoji associations are stored locally per workspace
+- ⚠️ **Workspace-specific**: Emoji associations are stored locally per workspace (recently used emojis are global)
 - ⚠️ **File tracking**: If a file is renamed or moved, the emoji marker may be lost (file tracking across renames planned for future release)
 - ⚠️ **One emoji per item**: Currently, each file or folder can have only one emoji marker of its own
 - ⚠️ **Symlinks**: Inheritance follows the path as written in the Explorer, not the symlink target
 - ⚠️ **Very large folders**: Marking a folder refreshes up to 5,000 descendants at once; beyond that, remaining items pick up the badge when the Explorer next redraws them
-- ⚠️ **UTF-8 support**: Some emojis may not display correctly depending on your system's font configuration
+- ⚠️ **UTF-8 support**: Some emojis may not display correctly depending on your system's font configuration. In particular 🩷 🩵 🩶 were added in Unicode 15.0 (2022) and may show as empty boxes on older operating systems — the other nine hearts and all squares are widely supported
 
 ### Planned Enhancements
 
@@ -436,7 +526,7 @@ This extension does not add any user-configurable VS Code settings. All emoji ma
 - ✨ Add emoji markers to files via context menu
 - 🗑️ Remove emoji markers from files
 - 🧹 Clear all emoji markers at once
-- 🎨 90+ curated emojis across multiple categories
+- 🎨 90+ curated emojis across multiple categories (the picker actually shipped 76; now 120)
 - 💾 Workspace-level persistence
 - ⚡ Quick access via Command Palette
 - 🔍 Searchable emoji picker
