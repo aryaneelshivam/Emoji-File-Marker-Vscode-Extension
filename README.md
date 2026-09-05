@@ -5,7 +5,7 @@
     <b>Mark and tag your files with emojis in the VS Code file explorer! 🎨</b>
   </p>
 
-  [![Version](https://img.shields.io/badge/version-0.1.2-blue.svg)](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
+  [![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=AryaneelShivam.emoji-file-markers)
   [![VS Code](https://img.shields.io/badge/VS%20Code-1.75.0+-brightgreen.svg)](https://code.visualstudio.com/)
   [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 
@@ -128,7 +128,8 @@ skipped, and the confirmation message tells you how many.
 
 Marking a **folder** badges the folder itself and everything inside it. Inherited badges are
 shown with a `·` prefix (for example `·🔥`) and a tooltip naming the folder they came from,
-so you can tell them apart from markers set directly on a file.
+so you can tell them apart from markers set directly on a file. Both are configurable — see
+[Extension Settings](#extension-settings).
 
 - A marker set **directly** on a file always wins over an inherited one
 - If several parent folders are marked, the **nearest** one wins
@@ -512,11 +513,61 @@ If you use version control, you may be able to recover from a previous commit.
 
 ## Extension Settings
 
-This extension does not add any user-configurable VS Code settings. All emoji markers are automatically stored at the workspace level in `.vscode/settings.json`.
+Emoji markers themselves are stored automatically at the workspace level in
+`.vscode/settings.json`. These settings control how **inherited** markers are shown:
+
+| Setting | Default | What it does |
+|---------|---------|--------------|
+| `emojiFileMarkers.showInheritedMarkers` | `true` | Show badges on items inside a marked folder. Turn off to badge only the folder you marked. |
+| `emojiFileMarkers.inheritedMarkerPrefix` | `"·"` | Character shown before an inherited emoji (`·🔥` vs `🔥`). Set to `""` for the bare emoji. |
+
+### Telling Inherited Markers Apart
+
+Inherited markers are distinguished by a **prefix character** and by the **tooltip**, which
+always names the folder the marker came from.
+
+The prefix defaults to `·` (middle dot), chosen to read as a quiet qualifier rather than
+compete with the emoji. Because a badge holds at most two characters and most emoji already
+use one, you get exactly one slot for it. Try `˙`, `↳`, `⤷` or `~` for something with more
+presence, or `""` for no prefix at all.
+
+Some things you might reach for are not possible, and the extension deliberately does not
+try to fake them:
+
+- ❌ **A "lighter" version of the same emoji.** Only 18 of the 120 emoji have an alternate
+  monochrome glyph, and none of the ones people actually mark folders with (🔥 ⭐ 🚀 🐛 📝
+  🧪) are among them, so it cannot be done consistently.
+- ❌ **Making the emoji transparent.** Colour emoji are rendered from the font's own colour
+  palette and ignore any colour or opacity the editor applies, so the badge stays fully
+  opaque no matter what.
+- ❌ **A different size, or a two-character prefix.** The badge budget is two characters
+  total, and the emoji uses one of them.
+
+> **💡 Tip**: If the visual distinction matters more than seeing inherited markers at all,
+> set `showInheritedMarkers` to `false` — the marked folder still shows its badge, and
+> nothing inside it competes with markers you set deliberately.
 
 ---
 
 ## Release Notes
+
+### 0.2.0
+
+**Picker**
+- 🕒 The picker is now grouped into labelled sections: a **🕒 Recently Used** section holding your last 12 picks (most recent first), followed by every category from [Available Emojis](#available-emojis) under its own separator. Recently used emojis stay in their category too. Recency is remembered globally
+- 🔍 Every emoji is searchable by the conventions in [Use Cases](#use-cases--best-practices) — `urgent`, `blocked`, `in progress`, `team review`, … — as well as by name
+- ➕ Grew the picker from 76 to **120** emojis. Added the 12 convention emojis that were documented but never selectable (💎 🚧 ⏳ 🔜 🧪 🎨 👤 👥 💬 📌 🔌 🌐), plus 11 filling real workflow gaps: ⛔ 🗑️ 📦 📱 🗃️ 👍 👎 and a new **⏰ Time & Progress** section (⏰ 📅 ♻️ 🔙)
+- 🎨 Added the complete colour sets: all 9 squares (🟥 🟧 🟨 🟩 🟦 🟪 🟫 ⬛ ⬜), a new **❤️ Hearts** section with all 12 hearts, and the 🟤 brown circle that was missing from the circle set
+- 🐞 Removed a duplicate ⚡ entry
+- 📚 New conventions documented in [Use Cases](#use-cases--best-practices): To Delete, Do Not Modify, Approved, Changes Requested, Mobile, Dependency, Deadline, Scheduled, Tech Debt, Deprecated, Archived
+
+**Settings**
+- ⚙️ New `emojiFileMarkers.showInheritedMarkers` and `emojiFileMarkers.inheritedMarkerPrefix` settings — see [Extension Settings](#extension-settings)
+
+**Markers**
+- 📁 Folders can be marked, and their contents inherit the badge with a `·` prefix
+- 🗂️ Multi-selection support for adding and removing markers
+- ⚡ Marker changes now refresh only the affected subtree instead of rescanning the whole workspace
 
 ### 0.1.0 - Initial Release
 

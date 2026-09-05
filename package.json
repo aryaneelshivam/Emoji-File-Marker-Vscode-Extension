@@ -2,7 +2,7 @@
   "name": "emoji-file-markers",
   "displayName": "Emoji File Markers",
   "description": "Mark and tag files with emojis in the VS Code file explorer",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "icon": "emojilogo.png",
   "publisher": "AryaneelShivam",
   "repository": {
@@ -59,6 +59,21 @@
           "group": "2_workspace@2"
         }
       ]
+    },
+    "configuration": {
+      "title": "Emoji File Markers",
+      "properties": {
+        "emojiFileMarkers.showInheritedMarkers": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show an emoji badge on files and folders inside a marked folder. When off, only the folder you marked gets a badge."
+        },
+        "emojiFileMarkers.inheritedMarkerPrefix": {
+          "type": "string",
+          "default": "·",
+          "markdownDescription": "Character placed before an inherited emoji to tell it apart from one set directly on the item, for example `·🔥` vs `🔥`. Set to an empty string to show the bare emoji. Only the first character is used — VS Code badges hold at most two."
+        }
+      }
     }
   },
   "scripts": {

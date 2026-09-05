@@ -166,6 +166,14 @@ export class StorageManager {
         return Object.keys(mappings).map(key => vscode.Uri.parse(key));
     }
 
+    /**
+     * Re-decorate everything that currently carries a marker, along with the subtrees
+     * below marked folders. Used when a setting changes the way markers are rendered.
+     */
+    refreshMarked(): void {
+        this.queueRefresh(this.getAllMarkedUris());
+    }
+
     dispose(): void {
         if (this.refreshTimer !== undefined) {
             clearTimeout(this.refreshTimer);

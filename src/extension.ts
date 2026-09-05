@@ -20,6 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Initialize and register decoration provider
     const decorationProvider = new EmojiDecorationProvider(storageManager);
     context.subscriptions.push(
+        decorationProvider,
         vscode.window.registerFileDecorationProvider(decorationProvider)
     );
 
